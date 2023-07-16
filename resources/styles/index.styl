@@ -1,0 +1,1329 @@
+@charset "utf-8"
+
+*{
+  -webkit-font-smoothing: antialiased;
+}
+
+img{
+  width: 100%;
+}
+
+.SPBR
+  display block
+  @media screen and (max-width: 768px)
+    display none
+
+// 使い回し
+bg_blue = #19315A
+bg_yellow = #FFE872
+notosans = 'Noto Sans JP', sans-serif
+notoserif = 'Noto Serif JP', serif;
+
+// ファーストビューの画像アニメーション
+
+@keyframes changeImgAnimation
+  0%
+    opacity 0
+  10%
+    opacity 1
+  90%
+    opacity 1
+  100%
+    opacity 0
+
+body{
+  background-color: bg_blue
+}
+
+// 救急ボタンアニメーション
+@keyframes shine
+  100%
+    left: 125%
+// お知らせボタンアニメーション
+@keyframes slide1
+  0%
+    opacity 0
+  20%
+    opacity 1
+  40%
+    opacity 1
+  60%
+    opacity 0
+  80%
+    opacity 1
+  100%
+    opacity 1
+
+@keyframes slide2
+  0%
+    opacity 1
+  20%
+    opacity 0
+  40%
+    opacity 1
+  60%
+    opacity 1
+  80%
+    opacity 0
+  100%
+    opacity 1
+
+@keyframes slide3
+  0%
+    opacity 1
+  20%
+    opacity 1
+  40%
+    opacity 0
+  60%
+    opacity 1
+  80%
+    opacity 1
+  100%
+    opacity 0
+
+/* Header */
+.Header
+  position fixed
+  z-index 9999
+  top 0
+  width 100%
+  transition: all .5s
+  &.isHidden
+    opacity 0
+    transform: translateY(-100%);
+  &__Inner
+    position relative
+    z-index 9999
+    margin-right auto
+    margin-left auto
+    padding-left 20px
+    display flex
+    justify-content: space-between
+    align-items: center
+    background-color: #1C3765
+    box-shadow: 1px 0px 7px #0B162B
+    @media screen and (max-width: 768px)
+      padding-right 20px
+      padding-top 10px
+      padding-bottom 10px
+  &-Logo
+    &-Link
+      display flex
+      align-items: center
+      gap: 20px
+      color: #FFF
+      font-family: notosans
+      font-size 35px
+      letter-spacing: 0.05em
+      font-weight: 700
+      @media screen and (max-width: 1300px)
+        gap 10px
+        font-size 20px
+      &-Img
+        width 81px
+        @media screen and (max-width: 1300px)
+          width 41px
+  &-PC
+    @media screen and (max-width: 768px)
+      display none
+    &-Nav
+      display flex
+      &-Container
+        @media screen and (max-width: 1300px)
+          display flex
+        &-Item
+          position relative
+          padding 25px
+          display flex
+          align-items: center
+          justify-content: center
+          height 115px
+          font-family: notosans
+          font-weight 500
+          font-size 25px
+          color: #FFF
+          @media screen and (max-width: 1300px)
+            padding 10px
+            height 64px
+            font-size 16px
+            height auto
+          &::before
+            content: ""
+            position absolute
+            bottom 25%
+            display block
+            width 50%
+            height 1px
+            transition: all .3s;
+            background-color: #FFF
+            transform: scale(0,1)
+            transform-origin: right
+          &:hover.Header-PC-Nav-Container-Item::before
+            transform: scale(1,1)
+      &-Reserve
+        margin-left 25px
+        background-color: white
+        @media screen and (max-width: 1300px)
+          margin-left 10px
+        &-Item
+          position relative
+          padding-right 45px
+          padding-left 45px
+          display flex
+          align-items: center
+          justify-content: center
+          gap 10px
+          height 115px
+          font-family: notosans
+          font-weight 500
+          font-size 25px
+          color: bg_blue
+          @media screen and (max-width: 1300px)
+            padding 20px
+            gap 5px
+            height auto
+            font-size 16px
+          &-Img
+            width 37px
+            @media screen and (max-width: 1300px)
+              width 22px
+          &::before
+            content: ""
+            position absolute
+            bottom 25%
+            display block
+            width 50%
+            height 1px
+            transition: all .3s;
+            background-color: bg_blue
+            transform: scale(0,1)
+            transform-origin: right
+          &:hover.Header-PC-Nav-Reserve-Item::before
+            transform: scale(1,1)
+  &-Hamburger
+    position relative
+    display none
+    width 30px
+    height 30px
+    @media screen and (max-width: 768px)
+      display block
+    &-Top
+      position absolute
+      top 0
+      right 0
+      left 0
+      bottom: 0
+      margin auto
+      width 100%
+      height 1px
+      background-color: #D9D9D9
+      transform: translateY(-7px)
+      transition: all 0.3s
+    &-Middle
+      position absolute
+      top 0
+      right 0
+      left 0
+      bottom: 0
+      margin auto
+      width 100%
+      height 1px
+      background-color: #D9D9D9
+      transition: all 0.3s
+    &-Bottom
+      position absolute
+      top 0
+      right 0
+      left 0
+      bottom: 0
+      margin auto
+      width 100%
+      height 1px
+      background-color: #D9D9D9
+      transform: translateY(7px)
+      transition: all 0.3s
+    &.isActive
+      & .Header-Hamburger-Top
+        transform: translateY(0) rotate(-45deg)
+      & .Header-Hamburger-Middle
+        opacity 0
+      & .Header-Hamburger-Bottom
+        transform: translateY(0) rotate(45deg)
+  &-SP
+    position absolute
+    z-index 8888
+    padding-top 15px
+    padding-bottom 15px
+    display none
+    align-items: center
+    justify-content: center
+    width 100%
+    height calc(100vh - 60px)
+    transition: all 0.3s
+    background-color: bg_blue
+    @media screen and (max-width: 768px)
+      display flex
+    // js操作
+    &.isRight
+      opacity 0
+      pointer-events: none
+      filter: blur(2px)
+      transform: translateX(100%);
+    &__Inner
+      margin-right auto
+      margin-left auto
+      max-width 280px
+    &-Date
+      margin-bottom 5px
+    &-Supplement
+      margin-bottom 10px
+    &-Bullet
+      margin-bottom 15px
+      display flex
+      flex-wrap: wrap
+      &-Item
+        position relative
+        display flex
+        align-items: center
+        justify-content: center
+        width 50%
+        height 50px
+        text-align: center
+        font-size 18px
+        font-family notosans
+        color: #fff
+        &::before
+          content ""
+          position absolute
+          bottom 6px
+          width 36px
+          height 1px
+          background-color: #FFF
+    &-Reserve
+      margin-bottom 15px
+      border-radius: 2px
+      box-shadow: -2px -2px 4px 0px rgba(0, 0, 0, 0.35) inset;
+      display flex
+      align-items: center
+      justify-content: center
+      width 100%
+      height 60px
+      text-align: center
+      background-color: #FFF
+      color: #19315A;
+      font-size: 20px;
+      font-family: notosans;
+      font-weight: 700;
+      line-height: 180%;
+      letter-spacing: 0.1em;
+    &-Aid
+      border-radius: 2px
+      box-shadow: -2px -2px 4px 0px rgba(0, 0, 0, 0.35) inset;
+      display flex
+      align-items: center
+      justify-content: center
+      width 100%
+      height 60px
+      text-align: center
+      background-color: #FFF
+      color: #19315A;
+      font-size: 20px;
+      font-family: notosans;
+      font-weight: 700;
+      line-height: 180%;
+      letter-spacing: 0.1em;
+/* バナー */
+.Banner
+  position fixed
+  z-index 9999
+  right 0
+  bottom 46px
+  padding-top 41px
+  padding-right 41px
+  padding-bottom 38px
+  display flex
+  align-items: center
+  border-radius: 2px 0px 0px 2px;
+  border: 1px solid #1A325A;
+  background: #FFF;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.30);
+  cursor: pointer
+  transform: translateX(537px)
+  transition: all .3s
+  @media screen and (max-width: 768px)
+    display none
+  &.isActive
+    transform: translateX(0px)
+  &.isHidden
+    opacity 0
+    pointer-events: none
+  &-Left
+    padding-right 25px
+    padding-left 25px
+    &-Headline
+      margin-bottom 20px
+      writing-mode: vertical-lr
+      color: #19315A;
+      font-size: 20px;
+      font-family: notosans
+      font-weight: 500;
+    &-Decoration
+      position relative
+      width 20px
+      height 20px
+      &-First
+        position absolute
+        top 0
+        right 0
+        bottom 0
+        left 0
+        margin auto
+        width 100%
+        height 2px
+        background-color: #1A315A
+      &-Second
+        position absolute
+        top 0
+        right 0
+        bottom 0
+        left 0
+        margin auto
+        width 100%
+        height 2px
+        transform: rotate(90deg)
+        background-color: #1A315A
+        transition: all .3s
+        &.isActive
+          opacity 0
+  &-Right
+    width 494px
+    &-Table
+      margin-bottom 20px
+/* ファーストビュー */
+.Firstview
+  position relative
+  margin-top 115px
+  background-color: bg_blue
+  @media screen and (max-width: 1300px)
+    margin-top 60px
+  &-Bg
+    position: absolute
+    top 0
+    right 0
+    left 0
+    margin auto
+    display flex
+    width 100%
+    height calc(100vh - 115px)
+    @media screen and (max-width: 1300px)
+      height:  calc(100vh - 60px)
+    &-Padding
+      width 15.625%
+      @media screen and (max-width: 768px)
+        display none
+    &-Pictures
+      position relative
+      width 100%
+      overflow: hidden
+      &-1
+        position absolute
+        top 0
+        right 0
+        bottom 0
+        left 0
+        margin auto
+        background-position: right
+        background-size: cover
+        transition: all 2s
+        @media screen and (max-width: 1300px)
+          background-position: 69% 100%
+        &.isHidden
+          opacity 0
+          pointer-events: none
+          transform: scale(1.03)
+      &-2
+        position absolute
+        top 0
+        right 0
+        bottom 0
+        left 0
+        margin auto
+        background-position: 40%
+        background-size: cover
+        transition: all 2s
+        &.isHidden
+          opacity 0
+          pointer-events: none
+          transform: scale(1.03)
+  &-Contents
+    position relative
+    margin-right auto
+    margin-left auto
+    padding-right 40px
+    padding-bottom 83px
+    padding-left 40px
+    display flex
+    align-items: flex-end
+    flex-wrap: wrap
+    width 100%
+    height: calc(100vh - 115px)
+    max-width 1440px
+    @media screen and (max-width: 1300px)
+      height:  calc(100vh - 60px)
+    @media screen and (max-width: 768px)
+      padding-top 20px
+      padding-right 20px
+      padding-bottom 20px
+      padding-left 20px
+      align-items: flex-start
+    &-MainTitle
+      margin-bottom 12px
+      padding-top 20px
+      padding-right 24px
+      padding-bottom 20px
+      padding-left 20px
+      width fit-content
+      color: bg_blue
+      background-color: #FFF
+      @media screen and (max-width: 768px)
+        margin-bottom clamp(5px,calc(500vw/320),12px);
+        padding-top clamp(9px,calc(900vw/320),20px);
+        padding-right: clamp(7px,calc(700vw/320),24px);
+        padding-bottom: clamp(9px,calc(900vw/320),20px);
+        padding-left: clamp(7px,calc(700vw/320),24px);
+      &-Img
+        @media screen and (max-width: 1300px)
+          height clamp(23px,calc(2300vw/320),45px);
+    &-SubTitle
+      padding-top 4px
+      padding-right 20px
+      padding-bottom 4px
+      padding-left 20px
+      display flex
+      align-items: flex-end
+      gap 9px
+      width 100%
+      font-weight 500
+      font-size 30px
+      font-family: notosans
+      letter-spacing: 0.05em
+      background-color: #142544
+      color: #FFF
+      @media screen and (max-width: 1300px)
+        display none
+      &-Big
+        font-size 45px
+    &-SubTitleSP
+      display none
+      @media screen and (max-width: 1300px)
+        margin-top clamp(5px,calc(500vw/320),10px)
+        padding-top: clamp(2px,calc(200vw/320),4px);
+        padding-right:clamp(7px,calc(700vw/320),20px);
+        padding-bottom: clamp(2px,calc(200vw/320),4px);
+        padding-left: clamp(7px,calc(700vw/320),20px);
+        font-size clamp(16px,calc(1600vw/320),30px)
+        letter-spacing: 0.05em
+        font-weight 700
+        display block
+        width fit-content
+        font-family: notoserif
+        background-color: #142544
+        color: #FFF
+      &-Big
+        display block
+        padding-top 2px
+        padding-bottom: 2px
+        font-size 45px
+        @media screen and (max-width: 768px)
+          font-size clamp(20px,calc(2000vw/320),45px)
+/* 救急の方へ */
+.Aid
+  background-color: bg_blue
+  &__Inner
+    margin-right auto
+    margin-left auto
+    max-width 1380px
+    padding-right 50px
+    padding-left 50px
+    height 100vh
+    display flex
+    align-items: center
+    justify-content: center
+    @media screen and (max-width: 768px)
+      padding-right 20px
+      padding-left 20px
+  &-Container
+    @media screen and (max-width: 768px)
+      text-align: center
+    &-Heading
+      margin-bottom 55px
+      font-family: notoserif
+      font-weight 700
+      font-size 60px
+      color: #FFF
+      @media screen and (max-width: 768px)
+        margin-bottom 25px
+        font-size 30px
+    &-Text
+      margin-bottom 70px
+      letter-spacing: 0.05em
+      font-weight 400
+      font-family: notosans
+      font-size 35px
+      color: #FFF
+      @media screen and (max-width: 768px)
+        margin-bottom 30px
+        font-size 14px
+    &-Button
+      position relative
+      margin-right 0
+      margin-left auto
+      padding 8px 17px
+      display block
+      width fit-content
+      line-height 180%
+      letter-spacing: 0.1em
+      font-weight: 700
+      font-size 23px
+      font-family: notosans
+      color: bg_blue
+      background-color: bg_yellow
+      overflow: hidden
+      @media screen and (max-width: 768px)
+        margin-right auto
+        margin-left auto
+        padding 7px 12px
+        font-size 15px
+      &::before
+        content: ""
+        position absolute
+        top 1px
+        right 1px
+        bottom 1px
+        left 1px
+        margin auto
+        border: 1px solid bg_blue
+      @media screen and (min-width: 769px)
+        &::after
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -85%;
+          width: 80%;
+          height: 100%;
+          background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+          transform: skewX(-25deg);
+        &:hover::after
+          animation: shine 0.7s;
+/* お知らせ */
+.News
+  background-color: bg_blue
+  &__Inner
+    margin-right auto
+    margin-left auto
+    padding-top 0
+    padding-right 50px
+    padding-bottom 190px
+    padding-left 50px
+    max-width 1380px
+    @media screen and (max-width: 768px)
+      padding-right 20px
+      padding-bottom 60px
+      padding-left 20px
+      max-width 600px
+  &-Heading
+    margin-bottom 60px
+    font-family: notoserif
+    font-weight: 700
+    font-size 60px
+    color: #FFF
+    @media screen and (max-width: 768px)
+      margin-bottom 10px
+      font-size: 30px;
+  &-List
+    margin-bottom 40px
+    @media screen and (max-width: 768px)
+      margin-bottom 30px
+    &-Item
+      &-Link
+        position relative
+        border-bottom: 1px solid #475A7B
+        padding-top 30px
+        padding-right 30px
+        padding-bottom 30px
+        padding-left 30px
+        display flex
+        align-items: center
+        @media screen and (max-width: 768px)
+          padding-top 15px
+          padding-right 0
+          padding-bottom 15px
+          padding-left 0
+          display block
+        &-Date
+          margin-right 30px
+          color: #FFF;
+          font-size: 18px;
+          font-family: notosans
+          font-weight: 500;
+          transition: all .3s
+          @media screen and (max-width: 768px)
+            margin-right 0
+            margin-bottom 10px
+            display block
+            font-size 12px
+        &-Text
+          color: #FFF;
+          font-size: 25px;
+          font-family: notosans
+          font-weight: 500;
+          transition: all .3s
+          @media screen and (max-width: 768px)
+            font-size: 16px;
+            font-weight: 500;
+        &::before
+          content: ""
+          position absolute
+          bottom -1px
+          right 0
+          left 0
+          margin auto
+          width 100%
+          height 1px
+          background-color: #3994FF
+          transform: scale(0);
+          transform-origin: left
+          transition: all .3s
+        @media screen and (min-width: 769px)
+          &:hover .News-Container-List-Item-Link-Date
+            color: #D0D0D0
+          &:hover .News-Container-List-Item-Link-Text
+            color: #D0D0D0
+          &:hover::before
+            transform: scale(1);
+  &-Button
+    margin-right 0
+    margin-left auto
+    border-radius: 2px
+    display flex
+    justify-content: center
+    align-items: center
+    gap: 10px
+    width 135px
+    height 40px
+    background-color: #fff
+    box-shadow: -3px -3px 3px 0px rgba(0, 0, 0, 0.4) inset;
+    transition: all .3s
+    @media screen and (max-width: 768px)
+      margin-right auto
+      margin-left auto
+    &-Decoration
+      display block
+      width 5px
+      height 5px
+      background-color: bg_blue
+    @media screen and (min-width: 769px)
+      &:hover
+        box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.4) inset;
+      &:hover .News-Container-Button-Decoration:nth-of-type(1)
+        animation: slide1 2.5s infinite;
+        background-color: #19315A
+      &:hover .News-Container-Button-Decoration:nth-of-type(2)
+        animation: slide2 2.5s infinite;
+        background-color: #19315A
+      &:hover .News-Container-Button-Decoration:nth-of-type(3)
+        animation: slide3 2.5s infinite;
+        background-color: #19315A
+/* 特徴 */
+.Feature
+  background-color: #FFF
+  &__Inner
+    margin-right auto
+    margin-left auto
+    padding-top 190px
+    padding-right 50px
+    padding-bottom 190px
+    padding-left 50px
+    max-width 1380px
+    @media screen and (max-width: 768px)
+      max-width 600px
+      padding-top 60px
+      padding-right 20px
+      padding-bottom 60px
+      padding-left 20px
+  &-Headline
+    margin-bottom 90px
+    color: #19315A;
+    font-size: 60px;
+    font-family: notoserif
+    font-weight: 700;
+    @media screen and (max-width: 768px)
+      margin-bottom 25px
+      font-size 30px
+  &-List
+    &-Item
+      padding-top 50px
+      padding-right 40px
+      padding-bottom 50px
+      padding-left 40px
+      border-radius: 2px;
+      background: #FBFCFF;
+      box-shadow: 2px 2px 4px 0px rgba(216, 226, 255, 0.35);
+      @media screen and (max-width: 768px)
+        margin-right -20px
+        margin-left -20px
+        border-radius: 0px
+        padding-top 30px
+        padding-right 20px
+        padding-bottom 30px
+        padding-left 20px
+      &-Container
+        margin-right: auto
+        margin-left: auto
+        max-width: 1120px
+        display flex
+        justify-content: center
+        flex-wrap: wrap
+        @media screen and (max-width: 768px)
+          display block
+        &-Texts
+          order 1
+          margin-right auto
+          margin-left 0
+          width 563px
+          @media screen and (max-width: 768px)
+            margin-right auto
+            margin-left auto
+            width auto
+          &-Headline
+            margin-bottom 25px
+            font-size: 35px;
+            font-family: notosans
+            font-weight: 500;
+            color: #19315A;
+            @media screen and (max-width: 768px)
+              margin-bottom 10px
+              font-size 20px
+          &-Text
+            margin-bottom 50px
+            color: #19315A;
+            font-size: 20px;
+            font-family: notosans
+            font-weight: 500;
+            line-height: 180%;
+            letter-spacing: 0.1em;
+            @media screen and (max-width: 768px)
+              margin-bottom: 0
+              font-size: 14px
+          &-Button
+            position relative
+            overflow hidden
+            margin-bottom 10px
+            padding: 10px 30px
+            display: block
+            width: fit-content
+            font-size: 20px;
+            font-family: notosans
+            font-weight: 500;
+            line-height: 180%;
+            letter-spacing: 0.1em;
+            border-radius: 2px;
+            border: 1px solid #19315A;
+            background-color: #FFF;
+            color: #19315A;
+            transition: all .4s
+            @media screen and (max-width: 768px)
+              margin-top: 30px
+              margin-right: auto
+              margin-bottom: 0px
+              margin-left: auto
+              padding: 6px 11px
+              font-size: 15px;
+            @media screen and (min-width: 769px)
+              &:hover
+                background-color: bg_blue
+                color: #FFF
+        &-Img
+          order: 2
+          margin-right: 0
+          margin-left: auto
+          width: 492px
+          @media screen and (max-width: 768px)
+            margin-right: auto
+            margin-left: auto
+            margin-bottom: 20px
+            width: 100%
+    &>*+*{
+      margin-top 40px
+      }
+      @media screen and (max-width: 768px)
+        &>*+*{
+        margin-top 20px
+        }
+/* 診察について */
+.Consultation
+  background-color: bg_blue
+  &__Inner
+    margin-right auto
+    margin-left auto
+    padding-top 190px
+    padding-right 50px
+    padding-bottom 190px
+    padding-left 50px
+    max-width 1380px
+    @media screen and (max-width: 768px)
+      max-width 600px
+      padding-top 60px
+      padding-right 20px
+      padding-bottom 60px
+      padding-left 20px
+  &-Headline
+    margin-bottom 90px
+    font-size: 60px;
+    font-family: notoserif;
+    font-weight: 700;
+    color: #FFF;
+    @media screen and (max-width: 768px)
+      margin-bottom 25px
+      font-size: 30px;
+  &-Container
+    display grid
+    gap: 50px
+    grid-template-columns: repeat(3, 1fr);
+    @media screen and (max-width: 1000px)
+      grid-template-columns: 1fr 1fr
+      gap: 20px
+    @media screen and (max-width: 400px)
+      grid-template-columns: 1fr
+    &-Item
+      position relative
+      &.isHidden
+        display none
+      &-Link
+        display block
+    &-Item::after
+      content: "";
+      position absolute
+      top: 5%;
+      right: 5%;
+      bottom: 5%;
+      left: 5%;
+      margin: auto;
+      border-radius: 2px
+      border: 5px solid #19315a;
+      opacity 0
+      transform: scale(1.05)
+      transition: all .3s
+      pointer-events: none
+    @media screen and (min-width: 769px)
+      &-Item:hover::after
+        opacity 1
+        transform: scale(1)    
+  &-Viewmore
+    @media screen and (max-width: 1000px)
+      margin-top 15px
+    @media screen and (max-width: 400px)
+      margin-top 30px
+    margin-right: auto;
+    margin-left: auto;
+    border-radius: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 135px;
+    height: 40px;
+    background-color: #fff;
+    box-shadow: -3px -3px 3px 0px rgba(0,0,0,0.4) inset;
+    &-Top
+      display: block;
+      width: 5px;
+      height: 5px;
+      background-color: #19315a;
+    &-Middle
+      display: block;
+      width: 5px;
+      height: 5px;
+      background-color: #19315a;
+    &-Bottom
+      display: block;
+      width: 5px;
+      height: 5px;
+      background-color: #19315a;
+/* よくある質問 */
+.Faq
+  background-color: #FFF
+  &__Inner
+    margin-right auto
+    margin-left auto
+    padding-top 190px
+    padding-right 50px
+    padding-bottom 190px
+    padding-left 50px
+    max-width 1380px
+    @media screen and (max-width: 768px)
+      max-width 600px
+      padding-top 60px
+      padding-right 20px
+      padding-bottom 60px
+      padding-left 20px
+  &-Headline
+    margin-bottom 90px
+    color: #19315A;
+    font-size: 60px;
+    font-family: notoserif
+    font-weight: 700;
+    @media screen and (max-width: 768px)
+      margin-bottom 25px
+      font-size 30px
+  &-List
+    margin-right auto
+    margin-left auto
+    &-Item
+      position relative
+      border-radius: 2px;
+      border: 1px solid #19315A;
+      padding-top 25px
+      padding-right 35px
+      padding-bottom 25px
+      padding-left 25px
+      display flex
+      align-items: center
+      justify-content: space-between
+      gap 10px
+      background-color: bg_blue
+      transition: all .5s
+      cursor: pointer
+      @media screen and (max-width: 768px)
+        padding-top 10px
+        padding-right 10px
+        padding-bottom 10px
+        padding-left 10px
+        align-items: flex-start
+      &-Question
+        width 100%
+        &Text
+          display none
+          color: #19315A;
+          font-size: 35px;
+          font-family: notosans
+          font-weight: 400;
+          transition: all .3s
+          @media screen and (max-width: 768px)
+            font-size 14px
+        &Decoration
+          display none
+          flex-shrink: 0
+          transition: all .3s
+          @media screen and (max-width: 768px)
+            width 30px
+      &-Answer
+        width 100%
+        background-color: bg_blue
+        &Text
+          color: #FFF;
+          font-size: 35px;
+          font-family: notosans
+          font-weight: 400;
+          transition: all .3s
+          @media screen and (max-width: 768px)
+            font-size: 14px
+        &Decoration
+          flex-shrink: 0
+          transition: all .3s
+          @media screen and (max-width: 768px)
+            width 30px
+      &.isInit
+        background-color: #FFF
+        & .Faq-List-Item-QuestionText
+          display block
+        & .Faq-List-Item-QuestionDecoration
+          display block
+        & .Faq-List-Item-AnswerText
+          display none
+        & .Faq-List-Item-AnswerDecoration
+          display none
+      @media screen and (min-width: 769px)
+        &:hover
+          & .Faq-List-Item-QuestionText
+            opacity 0.5
+          & .Faq-List-Item-QuestionDecoration
+            opacity 0.5
+          & .Faq-List-Item-AnswerText
+            opacity 0.5
+          & .Faq-List-Item-AnswerDecoration
+            opacity 0.5
+    &>*+*{
+        margin-top 35px
+      }
+    @media screen and (max-width: 768px)
+      &>*+*{
+          margin-top 15px
+        }
+.isInit.Faq-List-Item::before
+  background-color: bg_blue
+/* アクセス */
+.Access
+  background-color: bg_blue
+  &__Inner
+    margin-right auto
+    margin-left auto
+    padding-top 190px
+    padding-right 50px
+    padding-bottom 50px
+    padding-left 50px
+    max-width 1380px
+    @media screen and (max-width: 768px)
+      padding-top 60px
+      padding-right 20px
+      padding-bottom 60px
+      padding-left 20px
+      max-width 600px
+  &-Headline
+    margin-bottom 90px
+    font-size: 60px;
+    font-family: notoserif
+    font-weight: 700;
+    color: #FFF;
+    @media screen and (max-width: 768px)
+      margin-bottom 25px
+      color: #FFF;
+      font-size: 30px;
+      font-family: notoserif
+      font-weight: 700;
+  &-Container
+    display flex
+    justify-content: space-between
+    flex-wrap: wrap
+    gap 30px
+    flex-direction: row-reverse
+    @media screen and (max-width: 768px)
+      display block
+      gap: 0
+    &-IconList
+      margin-right 0
+      margin-left auto
+      border-radius: 2px
+      padding 40px
+      width 515px
+      flex-shrink: 0
+      background-color: #FBFCFF
+      @media screen and (max-width: 768px)
+        padding 30px
+        width 100%
+      &-Wrapper
+        margin-bottom 20px
+        @media screen and (max-width: 768px)
+          margin-right auto
+          margin-bottom 30px
+          margin-left auto
+          max-width 200px
+        &-Item
+          display flex
+          gap 25px
+          @media screen and (max-width: 768px)
+            gap: 10px
+          &-Img
+            width 50px
+            @media screen and (max-width: 768px)
+              width 33px
+          &-Text
+            color: #19315A;
+            font-size: 25px;
+            font-family: notosans
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            @media screen and (max-width: 768px)
+              font-size: 18px;
+        &>*+*{
+            margin-top 25px
+          }
+        @media screen and (max-width: 768px)
+          &>*+*{
+              margin-top 20px
+            }
+      &-Link
+        margin-right 0
+        margin-left auto
+        border-radius: 2px;
+        border: 1px solid #19315A;
+        padding 10px 17px
+        display block
+        width fit-content
+        text-align:center
+        font-size: 20px;
+        font-family: notosans
+        font-weight: 500;
+        line-height: 180%;
+        letter-spacing: 0.1em;
+        background-color: #FFF;
+        color: #19315A;
+        transition: all .4s
+        @media screen and (max-width: 768px)
+          margin-right auto
+          margin-left auto
+          padding 10px
+          font-size 18px
+        @media screen and (min-width: 769px)
+          &:hover
+            color: #fff
+            background-color: #19315A
+    &-Image
+      margin-right auto
+      margin-left 0
+      flex-grow: 1
+      min-width: 45%
+      max-width 705px
+      min-height 380px
+      @media screen and (max-width: 768px)
+        position relative
+        margin-bottom 30px
+        min-width auto
+        max-width: none
+        min-height: auto
+        width: 100%
+        padding-top 53%
+      &-Img
+        display block
+        height 100%
+        background-size: cover
+        background-position: center
+        @media screen and (max-width: 768px)
+          position absolute
+          top 0
+          right 0
+          bottom 0
+          left 0
+          margin auto
+          width: 100%
+          height: 100%
+/* マップ */
+.Map
+  width 100%
+  height 450px
+  @media screen and (max-width: 768px)
+    height 300px
+/* フッター */
+.Footer
+  background: #0B182F;
+  &__Inner
+    margin-right: auto;
+    margin-left: auto;
+    padding-top 50px
+    padding-right: 50px;
+    padding-bottom: 50px;
+    padding-left: 50px;
+    max-width: 1380px;
+    @media screen and (max-width: 768px)
+      padding-top 30px
+      padding-right 20px
+      padding-bottom 30px
+      padding-left 20px
+      max-width 600px
+  &-Top
+    display flex
+    justify-content: space-between
+    flex-wrap: wrap
+    gap 50px
+    @media screen and (max-width: 768px)
+      display block
+    &-Logo
+      width 339px
+      @media screen and (max-width: 768px)
+        margin-right auto
+        margin-bottom 15px
+        margin-left auto
+        width 210px
+    &-Tel
+      margin-right 0
+      margin-bottom 20px
+      margin-left auto
+      position relative
+      overflow: hidden
+      width 673px
+      @media screen and (max-width: 768px)
+        display none
+      @media screen and (min-width: 769px)
+        &::before
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -85%;
+          width: 80%;
+          height: 100%;
+          background: linear-gradient(to right, rgba(255,255,255,0) 0%, #fff 100%);
+          transform: skewX(-25deg);
+        &:hover::before
+          animation: shine 0.7s;
+    &-TelSP
+      display none
+      @media screen and (max-width: 768px)
+        border-radius: 2px;
+        padding 20px
+        width 100%
+        display flex
+        justify-content: center
+        align-items: center
+        background: linear-gradient(135deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.00) 100%), #FFE872;
+      &-Container
+        max-width 178px
+        &-Headline
+          margin-bottom 7px
+          color: #0B182F;
+          text-align: center;
+          font-size: 18px;
+          font-family: notosans
+          font-weight: 700;
+        &-BG
+          border-radius: 2px
+          padding: 10px 16px
+          background-color: #FFF
+          &-Text
+            color: #0B182F;
+            font-size: 12px;
+            font-family: notosans
+            font-weight: 700;
+  &-List
+    display flex
+    justify-content: flex-end
+    flex-wrap: wrap
+    @media screen and (max-width: 768px)
+      margin-right auto
+      margin-bottom 20px
+      margin-left auto
+      max-width 280px
+      justify-content: center
+    &-Item
+      margin-top 10px
+      padding-left 35px
+      color: #FFFFFF
+      font-size: 23px;
+      font-family: notosans
+      font-weight: 400;
+      transition: all .4s
+      @media screen and (max-width: 768px)
+        margin-top 0
+        padding-top 5px
+        padding-bottom 5px
+        padding-left 0px
+        width 140px
+        text-align: center
+        font-size: 15px;
+        &:last-child
+          width 100%
+      &:hover
+        opacity 0.8
+  &-Small
+    margin-top 35px
+    display block
+    text-align: end
+    color: #939393;
+    font-size: 12px;
+    font-family: notosans
+    font-weight: 500;
+    @media screen and (max-width: 768px)
+      margin-top 20px
+      text-align: center
+      color: #939393;
+      font-size: 12px;
